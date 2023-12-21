@@ -36,7 +36,7 @@ class DefaultRootComponent (
     private val toProfile: () -> Unit =  { navigation.bringToFront(Configuration.ProfileScreen) }
     private val toHome: () -> Unit = { navigation.bringToFront(Configuration.HomeScreen) }
     private val toRecent: () -> Unit = { navigation.bringToFront(Configuration.RecentScreen) }
-n
+
     private fun home(context: ComponentContext): DefaultHomeScreenComponent =
         DefaultHomeScreenComponent(
             componentContext = context,
