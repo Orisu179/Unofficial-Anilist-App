@@ -31,5 +31,9 @@ fun main() {
 //@Preview
 //@Composable
 //fun AppDesktopPreview() {
-//    App()
+//
+//    val lifecycle = LifecycleRegistry()
+//
+//    val root = DefaultRootComponent(DefaultComponentContext(lifecycle))
+//    App(root)
 //}
