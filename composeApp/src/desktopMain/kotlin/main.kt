@@ -8,12 +8,18 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import navigation.DefaultRootComponent
+import ui.Components.RootContent
 
 @OptIn(ExperimentalDecomposeApi::class)
 fun main() {
     val lifecycle = LifecycleRegistry()
 
-    val root = DefaultRootComponent(DefaultComponentContext(lifecycle))
+    val root = runOnUiThread {
+        DefaultRootComponent(
+            componentContext = DefaultComponentContext(lifecycle)
+        )
+    }
+
     application {
         val windowState = rememberWindowState()
 
@@ -23,7 +29,7 @@ fun main() {
             state = windowState,
             title = "JamHub"
         ) {
-            App(root)
+            RootContent(root)
         }
     }
 }

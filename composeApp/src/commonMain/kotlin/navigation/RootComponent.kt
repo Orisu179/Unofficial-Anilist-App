@@ -6,6 +6,9 @@ import com.arkivanov.decompose.value.Value
 interface RootComponent {
 
     val childStack: Value<ChildStack<*, Child>>
+    fun toProfile()
+    fun toHome()
+    fun toRecent()
     sealed class Child {
         class HomeChild(val component: HomeScreenComponent): Child()
         class RecentChild(val component: RecentScreenComponent): Child()

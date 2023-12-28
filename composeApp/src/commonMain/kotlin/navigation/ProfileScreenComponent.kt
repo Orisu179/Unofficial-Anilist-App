@@ -5,6 +5,7 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 
 interface ProfileScreenComponent {
+    val text: Value<String>
     fun changeToHome()
     fun changeToRecent()
 }
@@ -15,8 +16,8 @@ class DefaultProfileScreenComponent(
     private val toHome: () -> Unit,
 ): ProfileScreenComponent, ComponentContext by componentContext {
 
-    private var _text = MutableValue("This is the profile screen")
-    val text: Value<String> = _text
+    private val _text = MutableValue("This is the profile screen")
+    override val text: Value<String> = _text
     override fun changeToHome() {
        toHome()
     }

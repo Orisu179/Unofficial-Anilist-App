@@ -39,11 +39,10 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.decompose)
-            implementation("app.cash.sqldelight:android-driver:2.0.1")
+            implementation("com.google.oboe:oboe:1.8.0")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation("app.cash.sqldelight:native-driver:2.0.1")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -77,6 +76,7 @@ android {
     }
     buildFeatures {
         compose = true
+        prefab = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()

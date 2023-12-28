@@ -33,29 +33,36 @@ class DefaultRootComponent (
         }
     }
 
-    private val toProfile: () -> Unit =  { navigation.bringToFront(Configuration.ProfileScreen) }
-    private val toHome: () -> Unit = { navigation.bringToFront(Configuration.HomeScreen) }
-    private val toRecent: () -> Unit = { navigation.bringToFront(Configuration.RecentScreen) }
+    override fun toProfile() {
+        navigation.bringToFront(Configuration.ProfileScreen)
+    }
+    override fun toHome() {
+        navigation.bringToFront(Configuration.HomeScreen)
+    }
+
+    override fun toRecent() {
+       navigation.bringToFront(Configuration.RecentScreen)
+    }
 
     private fun home(context: ComponentContext): DefaultHomeScreenComponent =
         DefaultHomeScreenComponent(
             componentContext = context,
-            toRecent = toRecent,
-            toProfile = toProfile,
+            toRecent = { toRecent() },
+            toProfile = { toProfile() },
         )
 
     private fun recent(context: ComponentContext): DefaultRecentScreenComponent =
         DefaultRecentScreenComponent(
             componentContext = context,
-            toHome = toHome,
-            toProfile = toProfile,
+            toHome = { toHome() },
+            toProfile = { toProfile() },
         )
 
     private fun profile(context: ComponentContext): DefaultProfileScreenComponent =
         DefaultProfileScreenComponent(
             componentContext = context,
-            toHome = toHome,
-            toRecent = toRecent,
+            toHome = { toHome() },
+            toRecent = { toRecent() },
         )
 
 
