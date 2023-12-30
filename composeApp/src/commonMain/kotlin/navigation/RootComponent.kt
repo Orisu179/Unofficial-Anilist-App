@@ -6,6 +6,7 @@ import com.arkivanov.decompose.value.Value
 interface RootComponent {
 
     val childStack: Value<ChildStack<*, Child>>
+    val recentNews: Value<Boolean>
     fun toProfile()
     fun toHome()
     fun toRecent()

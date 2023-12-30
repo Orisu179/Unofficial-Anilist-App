@@ -79,6 +79,7 @@ fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {
 fun BottomBar(component: RootComponent, modifier: Modifier) {
     val childStack by component.childStack.subscribeAsState()
     val activeComponent = childStack.active.instance
+    val newsNotification by component.recentNews.subscribeAsState()
 //    var selectedItemIndex by rememberSaveable {
 //        mutableStateOf(0)
 //    }
@@ -102,12 +103,20 @@ fun BottomBar(component: RootComponent, modifier: Modifier) {
                     selected = activeComponent is Child.RecentChild,
                     onClick = component::toRecent,
                     icon = {
-                        Icon(
-                            imageVector = if (activeComponent is Child.RecentChild){
-                                Icons.Filled.History
-                            } else Icons.Outlined.History,
-                            contentDescription = "Recent"
-                        )
+                        BadgedBox(
+                            badge = {
+                                if (newsNotification) {
+                                    Badge()
+                                }
+                            }
+                        ){
+                           Icon(
+                               imageVector = if (activeComponent is Child.RecentChild){
+                                   Icons.Filled.History
+                               } else Icons.Outlined.History,
+                               contentDescription = "Recent"
+                           )
+                        }
                     }
                 )
                 NavigationBarItem(

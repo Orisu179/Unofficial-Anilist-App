@@ -25,7 +25,6 @@ internal fun RecentContent(component: RecentScreenComponent, modifier: Modifier)
             Text(
                 text = sampleText.value,
             )
-            Text(text = "hello")
         }
     }
 }

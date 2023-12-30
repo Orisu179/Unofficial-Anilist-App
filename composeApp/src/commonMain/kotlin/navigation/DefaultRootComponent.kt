@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 
@@ -12,6 +13,8 @@ class DefaultRootComponent (
     componentContext: ComponentContext
 ): RootComponent, ComponentContext by componentContext{
     private val navigation = StackNavigation<Configuration>()
+    private val _recentNews = MutableValue(true)
+    override val recentNews: Value<Boolean> = _recentNews
 
     override val childStack: Value<ChildStack<*, RootComponent.Child>> =
         childStack(
