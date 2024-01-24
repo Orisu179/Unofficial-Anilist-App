@@ -27,7 +27,7 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             state = windowState,
-            title = "JamHub"
+            title = "unofficial-anilist-app"
         ) {
             RootContent(root)
         }

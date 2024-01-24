@@ -1,4 +1,4 @@
-package ui.Components
+package ui.Components.Profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,7 @@ internal fun ProfileContent(component: ProfileScreenComponent, modifier: Modifie
     val sampleText = component.text.subscribeAsState()
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
             modifier = Modifier.background(color = MaterialTheme.colorScheme.secondary)

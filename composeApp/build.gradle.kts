@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
+    id("com.apollographql.apollo3") version "4.0.0-beta.4"
 }
 
 kotlin {
@@ -17,9 +18,8 @@ kotlin {
             }
         }
     }
-    
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -30,16 +30,15 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(libs.compose.ui)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.decompose)
-            implementation("com.google.oboe:oboe:1.8.0")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -55,12 +54,12 @@ kotlin {
             implementation(libs.decompose.jetbrains)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
+            implementation("com.apollographql.apollo3:apollo-runtime:4.0.0-beta.4")
         }
     }
 }
-
 android {
-    namespace = "org.example.project"
+    namespace = "com.orisu179.anilist"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -68,7 +67,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "org.example.project"
+        applicationId = "com.orisu179.anilist"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -106,8 +105,14 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.example.project"
+            packageName = "com.orisu179.anilist"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+apollo {
+    service("service") {
+        packageName.set("com.orisu179.anilist")
     }
 }

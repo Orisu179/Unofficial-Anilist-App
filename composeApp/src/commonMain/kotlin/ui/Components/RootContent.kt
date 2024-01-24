@@ -11,9 +11,6 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
@@ -24,6 +21,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import navigation.RootComponent
 import navigation.RootComponent.Child
+import ui.Components.Profile.ProfileContent
 import kotlin.reflect.KFunction
 
 data class NavigationItem(
@@ -80,9 +78,6 @@ fun BottomBar(component: RootComponent, modifier: Modifier) {
     val childStack by component.childStack.subscribeAsState()
     val activeComponent = childStack.active.instance
     val newsNotification by component.recentNews.subscribeAsState()
-//    var selectedItemIndex by rememberSaveable {
-//        mutableStateOf(0)
-//    }
 
     Scaffold (
         bottomBar = {
@@ -96,6 +91,18 @@ fun BottomBar(component: RootComponent, modifier: Modifier) {
                                 Icons.Filled.Home
                             } else Icons.Outlined.Home,
                             contentDescription = "Home"
+                        )
+                    }
+                )
+                NavigationBarItem(
+                    selected = activeComponent is Child.ProfileChild,
+                    onClick = component::toProfile,
+                    icon = {
+                        Icon(
+                            imageVector = if (activeComponent is Child.ProfileChild){
+                                Icons.Filled.Person
+                            } else Icons.Outlined.Person,
+                            contentDescription = "List"
                         )
                     }
                 )
@@ -114,21 +121,9 @@ fun BottomBar(component: RootComponent, modifier: Modifier) {
                                imageVector = if (activeComponent is Child.RecentChild){
                                    Icons.Filled.History
                                } else Icons.Outlined.History,
-                               contentDescription = "Recent"
+                               contentDescription = "Seasonal"
                            )
                         }
-                    }
-                )
-                NavigationBarItem(
-                    selected = activeComponent is Child.ProfileChild,
-                    onClick = component::toProfile,
-                    icon = {
-                        Icon(
-                            imageVector = if (activeComponent is Child.ProfileChild){
-                                Icons.Filled.Person
-                            } else Icons.Outlined.Person,
-                            contentDescription = "Profile"
-                        )
                     }
                 )
             }
