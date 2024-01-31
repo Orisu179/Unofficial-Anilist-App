@@ -1,4 +1,4 @@
-package graphql
+package domain
 
 import com.apollographql.apollo3.ApolloClient
 

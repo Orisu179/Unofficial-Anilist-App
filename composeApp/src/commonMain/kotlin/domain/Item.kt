@@ -1,4 +1,4 @@
-package data
+package domain
 
 import kotlin.time.TimeSource
 
