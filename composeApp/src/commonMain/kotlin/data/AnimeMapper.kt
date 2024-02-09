@@ -13,12 +13,19 @@ fun AnimeQuery.Media.toDetailedAnime() : DetailedAnime {
         romajiTitle = title?.romaji,
         score = averageScore,
         releaseDate = seasonYear.toString(),
-        coverImageUrl = coverImage?.medium,
+        coverImageUrl = coverImage?.large,
         description = description,
         status = status,
         genres = genres,
     )
 }
 
-fun UserAnimeListQuery.MediaList.toSimpleAnimeList() : List<SimpleAnime> {
+fun UserAnimeListQuery.MediaList.toSimpleAnime() : SimpleAnime {
+    return SimpleAnime(
+        id = media?.id,
+        title = media?.title?.english,
+        score = media?.averageScore,
+        releaseDate = media?.seasonYear.toString(),
+        coverImageUrl = media?.coverImage?.medium,
+    )
 }

@@ -13,14 +13,14 @@ class ApolloAnilistClient(
         TODO()
     }
 
-    override suspend fun getUserAnimeList(userId: Int): List<SimpleAnime> {
+    override suspend fun getUserAnimeList(userId: Int): List<SimpleAnime?>? {
         return apolloClient
             .query(UserAnimeListQuery(userId = userId))
             .execute()
             .data
             ?.Page
-            .mediaList
-            ?.map { TODO() }
+            ?.mediaList
+            ?.map { it?.toSimpleAnime() }
     }
 
     override suspend fun getAnimeById(id: Int): DetailedAnime? {

@@ -8,7 +8,7 @@ query AnimeQuery ($id: Int!) { # Define which variables will be used in the quer
         }
         seasonYear
         coverImage {
-            medium
+            large
         }
         averageScore
         description
@@ -21,18 +21,20 @@ query AnimeQuery ($id: Int!) { # Define which variables will be used in the quer
 #    MediaList ()
 #}
 
-query UserAnimeListQuery($userId: Int, $page: Int, $perPage: Int){
+query UserAnimeListQuery($userId: Int!, $page: Int, $perPage: Int){
     Page(page: $page, perPage: $perPage){
         mediaList(id: $userId, type: ANIME){
             media {
                 id
                 title {
-                    romaji
                     english
                 }
                 averageScore
                 seasonYear
                 season
+                coverImage {
+                    medium
+                }
             }
         }
     }
