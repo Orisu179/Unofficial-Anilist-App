@@ -33,6 +33,7 @@ class DefaultRootComponent (
             Configuration.HomeScreen -> RootComponent.Child.HomeChild(home(context))
             Configuration.RecentScreen -> RootComponent.Child.RecentChild(recent(context))
             Configuration.ProfileScreen -> RootComponent.Child.ProfileChild(profile(context))
+            Configuration.DetailedScreen -> RootComponent.Child.Detailchild(detail(context))
         }
     }
 
@@ -47,25 +48,35 @@ class DefaultRootComponent (
        navigation.bringToFront(Configuration.RecentScreen)
     }
 
+    override fun toDetails() {
+        navigation.bringToFront(Configuration.DetailedScreen)
+    }
     private fun home(context: ComponentContext): DefaultHomeScreenComponent =
         DefaultHomeScreenComponent(
             componentContext = context,
-            toRecent = { toRecent() },
-            toProfile = { toProfile() },
+            toRecent = ::toRecent,
+            toProfile = ::toProfile,
+            toDetails = ::toDetails,
         )
 
     private fun recent(context: ComponentContext): DefaultRecentScreenComponent =
         DefaultRecentScreenComponent(
             componentContext = context,
-            toHome = { toHome() },
-            toProfile = { toProfile() },
+            toHome = ::toHome,
+            toProfile = ::toProfile,
         )
 
     private fun profile(context: ComponentContext): DefaultProfileScreenComponent =
         DefaultProfileScreenComponent(
             componentContext = context,
-            toHome = { toHome() },
-            toRecent = { toRecent() },
+            toHome = ::toHome,
+            toRecent = ::toRecent,
+        )
+
+    private fun detail(context: ComponentContext): DefaultDetailsScreenComponent =
+        DefaultDetailsScreenComponent(
+            componentContext = context,
+            toHome = ::toHome,
         )
 
 
@@ -79,5 +90,8 @@ class DefaultRootComponent (
 
         @Serializable
         data object ProfileScreen: Configuration()
+
+        @Serializable
+        data object DetailedScreen: Configuration()
     }
 }
